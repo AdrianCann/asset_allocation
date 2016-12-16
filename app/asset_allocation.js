@@ -5,32 +5,30 @@
   };
 
   AssetAllocation.prototype = {
-    set: function(allocations){
-      this.percentBonds = allocations.percentBonds;
-    },
-
-    _percentStocks: function() {
-      return 100 - this.percentBonds;
-    },
-
-    _percentIntStocks: function() {
-      return this._percentStocks() * this._intStockPercent;
-    },
-
-    _percentUSStock: function() {
-      return this._percentStocks() * (1 - this._intStockPercent);
+    setPercentBonds: function(percent){
+      this.percentBonds = percent;
+      this.percentUSStock = (100 - percent) * (1 - this._intStockPercent);
+      this.percentIntStock = (100 - percent) * (this._intStockPercent);
     },
 
     totalBonds: function(){
-      return Math.round((this.percentBonds / 100) * this.amount);
+      return this._roundedTotal(this.percentBonds);
     },
 
     totalUSStock: function(){
-      return Math.round((this._percentUSStock() / 100) * this.amount);
+      return this._roundedTotal(this.percentUSStock);
     },
 
     totalIntStock: function(){
-      return Math.round((this._percentIntStocks() / 100) * this.amount);
+      return this._roundedTotal(this.percentIntStock);
+    },
+
+    _total: function(percent){
+      return (percent / 100) * this.amount;
+    },
+
+    _roundedTotal: function(percent){
+      return Math.round(this._total(percent));
     }
   };
 
