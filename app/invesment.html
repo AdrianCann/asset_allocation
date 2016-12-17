@@ -2,12 +2,28 @@
 <html>
   <head>
     <title>Asset Allocation</title>
-    <script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="investment.css" rel="stylesheet" type="text/css">
   </head>
 
   <body>
+    <form action="javascript:void(0);">
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input id="amount" value="100">
+      </div>
+      <div class="form-group">
+        <label for="percent_bonds">Percent Bonds</label>
+        <input id="percent_bonds" value="10">
+      </div>
+      <button>Submit</button>
+    </form>
+    <div class="chart-container">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
     <script src="asset_allocation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+    <script src="chart.js"></script>
+    <script src="animate.js"></script>
   </body>
 </html>
 
